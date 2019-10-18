@@ -9,11 +9,9 @@ const twilioClient = require('twilio')(twilioAccountSid, twilioAuthToken); // es
 module.exports.sendText = async (event) => {
   try {
     let response = utils.getResponseObject();
-    // Object.assign(event, { from: twilioNumber });
-    event.body.from = '18882747732';
     const messenger = new Messenger(twilioClient);
+    event.body.from = twilioNumber;
     
-    console.log('sendEvent:', event)
     const message = await messenger.send(event);
         
         let body = JSON.stringify({
