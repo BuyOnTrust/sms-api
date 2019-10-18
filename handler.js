@@ -9,10 +9,11 @@ const twilioClient = require('twilio')(twilioAccountSid, twilioAuthToken); // es
 module.exports.sendText = async (event) => {
   try {
     let response = utils.getResponseObject();
-    Object.assign(event.body, { from: twilioNumber });
-
+    // Object.assign(event, { from: twilioNumber });
+    event.body.from = '18882747732';
     const messenger = new Messenger(twilioClient);
     
+    console.log('sendEvent:', event)
     const message = await messenger.send(event);
         
         let body = JSON.stringify({
@@ -25,15 +26,15 @@ module.exports.sendText = async (event) => {
         return response;
   } catch(err) {
     console.log(
-      'Error sending optin SMS:',
+      'Error in serverless side, sending optin SMS:',
       err
     );
     return {
       statusCode: err.statusCode ? err.statusCode : 500,
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(err.message ?
-        'Could not send optin SMS to the user:' + err.message :
-        'Uknown error: Could not send optin SMS to the user.'
+        'Could not send optin SMS: Serverless error:' + err.message :
+        'Uknown error: Could not send optin SMS to the user. Serverless error:'
       )
     };
   }

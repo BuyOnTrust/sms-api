@@ -10,7 +10,7 @@ class Messenger {
         const sms = {
             to: event.body.to,
             body: event.body.message || '',
-            from: process.env.TWILIO_PHONE_NUMBER,
+            from: event.body.from || process.env.TWILIO_PHONE_NUMBER || 18882747732,
         };
 
         // add image to sms if supplied
