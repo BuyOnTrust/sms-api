@@ -14,7 +14,7 @@ In order to test and deploy this lambda you will need to have:
 
 Before being able to test and deploy, you need to provided the needed configuration.
 
-Configuration needs to be stored in a `.env` file (you can copy the template from the `.env.example` sample file) that will look like this:
+Configuration needs to be stored changed in aws lambda console:
 
 ```bash
 TWILIO_ACCOUNT_SID=YOUR_TWILIO_ACCOUNT_SID
